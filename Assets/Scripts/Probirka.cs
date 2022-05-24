@@ -36,7 +36,7 @@ public class Probirka : MonoBehaviour
             setProbka = !setProbka;
             this.transform.GetChild(2).gameObject.SetActive(setProbka);
         }
-        if (Mathf.Abs(this.transform.rotation.eulerAngles.z) > 45f && !setProbka)
+        if (Mathf.Abs(this.transform.rotation.eulerAngles.z) > 90f && !setProbka)
         {
             Tim += Time.deltaTime;
             if (Tim > 0.5)
@@ -44,7 +44,11 @@ public class Probirka : MonoBehaviour
                 GameObject kap = Instantiate(kaplya);
                 kap.name = "Kaplya";
                 Vector3 coordinate = this.transform.GetChild(2).transform.position;
-
+                kap.transform.position = coordinate + Vector3.forward * 10;
+                Tim = 0;
+                GameObject fon = this.transform.GetChild(1).gameObject;
+                fon.GetComponent<Image>().fillMethod = Image.FillMethod.Horizontal;
+                fon.GetComponent<Image>().fillAmount -= 0.1f;
             }
         }
         this.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
